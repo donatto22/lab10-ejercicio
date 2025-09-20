@@ -1,0 +1,16 @@
+@import url(./styles.css);
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+form button {
+    margin-top: 1em;
+}
+
+#mensaje {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+}
