@@ -13,30 +13,37 @@ const boton = document.getElementById("agregar")
 const lista = document.getElementById("lista")
 
 boton.addEventListener("click", () => {
-  const valor = input.value.trim()
+    lista.textContent = ''
 
-  if (valor) {
-    frutas.push(valor)
-    const li = document.createElement("li")
-    const p = document.createElement('p')
-    const button = document.createElement('button')
+    const valor = input.value.trim()
+    input.value = ''
 
-    p.textContent = valor
-    button.textContent = 'Eliminar'
-
-    // findIndex para obtener el índice del elemento buscado
-    const indiceAEliminar = frutas.findIndex(f => f == valor)
-
-    // con ese indice empezamos a trabajar en el .splice para eliminarlo
-    button.addEventListener('click', () => {
-        frutas.splice(indiceAEliminar, 1)
-        console.log(frutas)
-    })
-
-    li.appendChild(p)
-    li.appendChild(button)
-
-    lista.appendChild(li)
-    input.value = ""
-  }
+    if (valor) {
+        frutas.push(valor)
+        cargarFrutas(frutas)
+    }
 })
+
+const cargarFrutas = (frutas) => {
+    lista.textContent = ''
+
+    frutas.forEach((fruta, index) => {
+        const li = document.createElement("li")
+        const p = document.createElement('p')
+        const button = document.createElement('button')
+
+        p.textContent = fruta
+        button.textContent = 'Eliminar'
+
+        button.addEventListener('click', () => {
+            frutas.splice(index, 1)
+            cargarFrutas(frutas)
+        })
+
+        li.appendChild(p)
+        li.appendChild(button)
+
+        lista.appendChild(li)  
+    })
+}
+
